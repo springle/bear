@@ -3,4 +3,3 @@
 1. Clone this repo.
 2. Install [docker](https://docs.docker.com/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/).
 3. Run `docker-compose up` from the project directory.
-4. Open [localhost:8000](http://localhost:8000).
