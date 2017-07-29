@@ -4,7 +4,7 @@ services:
     image: postgres
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000 --settings=bear.settings_local
     volumes:
       - .:/code
     ports:
