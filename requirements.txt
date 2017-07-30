@@ -1,3 +1,5 @@
 Django==1.11.3
 psycopg2
+coreapi
+django-filter
 djangorestframework==3.6.3
