@@ -4,7 +4,7 @@ from rest_framework.schemas import get_schema_view
 from search import views
 
 router = routers.DefaultRouter()
-router.register(r'courses', views.BerkeleyClassViewSet)
+router.register(r'berkeley-classes', views.BerkeleyClassViewSet)
 router.register(r'users', views.UserViewSet)
 
 schema_view = get_schema_view(title='Bear Search API')

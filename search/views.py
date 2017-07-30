@@ -41,7 +41,7 @@ class BerkeleyClassViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = BerkeleyClassSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('title',)
-    ordering_fields = ('title',)
+    ordering_fields = ('id',)
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """

@@ -7,9 +7,11 @@ maintain the database.
 
 import os
 import json
+import django
 import requests
 
 from search import constants
+from search import models
 
 CLASSES_APP_ID = os.environ.get("CLASSES_APP_ID")
 CLASSES_APP_KEY = os.environ.get("CLASSES_APP_KEY")
@@ -74,6 +76,7 @@ class ClassesAPI:
             "app_key": CLASSES_APP_KEY,
             "Accept": "application/json"
         }
+        self.term = term
         self.berkeley_api = BerkeleyAPI(url, params, headers)
 
     def query(self):
@@ -84,10 +87,34 @@ class ClassesAPI:
         q = QueryDict(d)
         classes = q.get("apiResponse/response/classes")
         for c in classes:
-            self.generate_model(QueryDict(c))
+            self.generate_model_instance(QueryDict(c))
             display_name = c.get("displayName")
             component_code = c.get("primaryComponent/description")
         return len(classes) > 0
 
-    def generate_model(self, data):
-        
+    def generate_model_instance(self, data):
+        m = models.BerkeleyClass()
+        m.display_name = data.get("displayName")
+        m.term = self.term
+        m.term_name = data.get("session/term/name")
+        m.title = data.get("course/title")
+        m.number = data.get("number")
+        m.offering_number = data.get("offeringNumber")
+        m.description = data.get("classDescription", default="n/a")
+        m.subject_code = data.get("course/subjectArea/code")
+        m.subject = data.get("course/subjectArea/description")
+        m.enrolled_count = data.get("aggregateEnrollmentStatus/enrolledCount")
+        m.waitlisted_count = data.get("aggregateEnrollmentStatus/waitlistedCount")
+        m.min_enroll = data.get("aggregateEnrollmentStatus/minEnroll")
+        m.max_enroll = data.get("aggregateEnrollmentStatus/maxEnroll")
+        m.max_waitlist = data.get("aggregateEnrollmentStatus/maxWaitlist")
+        m.enrollment_status_code = data.get("aggregateEnrollmentStatus/status/code")
+        m.enrollment_status = data.get("aggregateEnrollmentStatus/status/description")
+        m.component_code = data.get("primaryComponent/code")
+        m.component = data.get("primaryComponent/description")
+        try:
+            m.save()
+        except django.db.utils.IntegrityError:
+            pass
+        except ValueError as e:
+            print(e)

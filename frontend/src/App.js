@@ -11,7 +11,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>welcome to bear</h2>
         </div>
-        <CourseList url="/search/courses/" pollInterval={10000} />
+        <CourseList url="/search/berkeley-classes/?ordering=-id" pollInterval={1000} />
       </div>
     );
   }
@@ -48,14 +48,14 @@ class CourseList extends Component {
   render() {
     if (this.state.data) {
       if (this.state.data.results) {
-        var courseNodes = this.state.data.results.map(function(course, index) {
-          return <li key={index}>{course.title}</li>
+        var courseNodes = this.state.data.results.map(function(course) {
+          return <li key={course.id}>{course.title}</li>
         });
       }
     }
     return (
       <div>
-        <p><u>Courses</u></p>
+        <p><u>Live Course List</u></p>
         {courseNodes}
       </div>
     )
