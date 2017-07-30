@@ -80,6 +80,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
+REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend')
+
+STATICFILES_DIRS = [
+    os.path.join(REACT_APP_DIR, 'build', 'static'),
+]
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -131,3 +137,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Local Settings
+LOCAL = os.environ.get('LOCAL')
+if LOCAL:
+    MIDDLEWARE.append('search.middleware.dev_cors_middleware')
