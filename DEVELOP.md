@@ -23,7 +23,7 @@ in using the credentials you just created.
 
 # FAQ
 
-Q: My containers didn't shut down properly after I hit <CTRL-C>. What should
+Q: My containers didn't shut down properly after I hit `<CTRL-C>`. What should
 I do?
 
 A: Run `docker-compose kill` to shut down your containers. Run `docker ps` to
