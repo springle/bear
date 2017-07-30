@@ -13,6 +13,8 @@ services:
       - db
     environment:
       - LOCAL=1
+      - CLASSES_APP_ID=${CLASSES_APP_ID}
+      - CLASSES_APP_KEY=${CLASSES_APP_KEY}
   frontend:
     build: frontend
     command: npm start

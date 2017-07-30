@@ -48,13 +48,14 @@ class CourseList extends Component {
   render() {
     if (this.state.data) {
       if (this.state.data.results) {
-        var courseNodes = this.state.data.results.map(function(course) {
-          return <p>{course.title}</p>
+        var courseNodes = this.state.data.results.map(function(course, index) {
+          return <li key={index}>{course.title}</li>
         });
       }
     }
     return (
       <div>
+        <p><u>Courses</u></p>
         {courseNodes}
       </div>
     )

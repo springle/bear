@@ -5,6 +5,15 @@
 [docker-compose](https://docs.docker.com/compose/install/).
 3. Run `docker-compose up` from the project directory.
 4. Open [localhost:3000](http://localhost:3000) in your browser.
+5. (Optional) If you plan to use the Berkeley APIs, you will need to add
+the following two lines to your bash profile. Ask one of the admins to
+give you the API_KEY and API_SECRET_KEY. Remember to restart your terminal
+after updating your bash profile for the changes to take effect.
+
+```bash
+export CLASSES_APP_ID="<API_KEY>"
+export CLASSES_APP_KEY="<API_SECRET_KEY>"
+```
 
 # Set up your database
 

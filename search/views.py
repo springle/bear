@@ -7,8 +7,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.views.generic import View
 
-from search.models import Course
-from search.serializers import CourseSerializer, UserSerializer
+from search.models import BerkeleyClass
+from search.serializers import BerkeleyClassSerializer, UserSerializer
 
 from rest_framework import viewsets, permissions, filters
 
@@ -33,12 +33,12 @@ class FrontendAppView(View):
                 status=501,
             )
 
-class CourseViewSet(viewsets.ReadOnlyModelViewSet):
+class BerkeleyClassViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows Courses to be viewed or edited.
     """
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
+    queryset = BerkeleyClass.objects.all()
+    serializer_class = BerkeleyClassSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('title',)
     ordering_fields = ('title',)

@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from search.models import Course
+from search.models import BerkeleyClass
 from django.contrib.auth.models import User
 
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
+class BerkeleyClassSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Course
+        model = BerkeleyClass
         fields = ('title', 'description')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

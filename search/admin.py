@@ -1,4 +1,4 @@
 from django.contrib import admin
-from search.models import Course
+from search.models import BerkeleyClass
 
-admin.site.register(Course)
+admin.site.register(BerkeleyClass)
