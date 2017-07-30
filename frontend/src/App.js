@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import $ from 'jquery';
 
 class App extends Component {
   render() {
@@ -10,11 +11,53 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>welcome to bear</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <CourseList url="/search/courses/" pollInterval={10000} />
       </div>
     );
+  }
+}
+
+class CourseList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {data: []}
+    this.loadCoursesFromServer = this.loadCoursesFromServer.bind(this);
+  }
+
+  loadCoursesFromServer() {
+    $.ajax({
+      url: this.props.url,
+      datatype: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this)
+    })
+  }
+
+  componentDidMount() {
+    this.loadCoursesFromServer();
+    this.timer = setInterval(this.loadCoursesFromServer,
+                            this.props.pollInterval);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  render() {
+    if (this.state.data) {
+      if (this.state.data.results) {
+        var courseNodes = this.state.data.results.map(function(course) {
+          return <p>{course.title}</p>
+        });
+      }
+    }
+    return (
+      <div>
+        {courseNodes}
+      </div>
+    )
   }
 }
 
