@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import bear from './bear.gif';
 import './App.css';
 import $ from 'jquery';
 
@@ -8,10 +8,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>welcome to bear</h2>
+          <img src={bear} className="App-logo" alt="logo" />
+          <h2>bear.ai</h2>
         </div>
-        <CourseList url="/search/courses/" pollInterval={10000} />
+        <CourseList url="/search/berkeley-classes/?ordering=-id" pollInterval={1000} />
       </div>
     );
   }
@@ -49,12 +49,13 @@ class CourseList extends Component {
     if (this.state.data) {
       if (this.state.data.results) {
         var courseNodes = this.state.data.results.map(function(course) {
-          return <p>{course.title}</p>
+          return <li key={course.id}>{course.title}</li>
         });
       }
     }
     return (
       <div>
+        <p><u>Live Course List</u></p>
         {courseNodes}
       </div>
     )

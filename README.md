@@ -1,3 +1,5 @@
+![bear](bear.gif)
+
 # bear.ai
 Making course selection at UC Berkeley better.
 
