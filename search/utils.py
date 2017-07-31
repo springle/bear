@@ -97,28 +97,49 @@ class ClassesAPI:
 
     def generate_model_instance(self, data):
         m = models.BerkeleyClass()
-        m.display_name = data.get("displayName")
-        m.term = self.term
-        m.term_name = data.get("session/term/name")
-        m.title = data.get("course/title")
-        m.number = data.get("number")
-        m.offering_number = data.get("offeringNumber")
-        m.description = data.get("classDescription", default="n/a")
-        m.subject_code = data.get("course/subjectArea/code")
-        m.subject = data.get("course/subjectArea/description")
-        m.enrolled_count = data.get("aggregateEnrollmentStatus/enrolledCount")
-        m.waitlisted_count = data.get("aggregateEnrollmentStatus/waitlistedCount")
-        m.min_enroll = data.get("aggregateEnrollmentStatus/minEnroll")
-        m.max_enroll = data.get("aggregateEnrollmentStatus/maxEnroll")
-        m.max_waitlist = data.get("aggregateEnrollmentStatus/maxWaitlist")
-        m.enrollment_status_code = data.get("aggregateEnrollmentStatus/status/code")
-        m.enrollment_status = data.get("aggregateEnrollmentStatus/status/description")
-        m.component_code = data.get("primaryComponent/code")
-        m.component = data.get("primaryComponent/description")
+        display_name = data.get("displayName")
+        term = self.term
+        term_name = data.get("session/term/name")
+        title = data.get("course/title")
+        number = data.get("number")
+        offering_number = data.get("offeringNumber")
+        description = data.get("classDescription", default="n/a")
+        subject_code = data.get("course/subjectArea/code")
+        subject = data.get("course/subjectArea/description")
+        enrolled_count = data.get("aggregateEnrollmentStatus/enrolledCount")
+        waitlisted_count = data.get("aggregateEnrollmentStatus/waitlistedCount")
+        min_enroll = data.get("aggregateEnrollmentStatus/minEnroll")
+        max_enroll = data.get("aggregateEnrollmentStatus/maxEnroll")
+        max_waitlist = data.get("aggregateEnrollmentStatus/maxWaitlist")
+        enrollment_status_code = data.get("aggregateEnrollmentStatus/status/code")
+        enrollment_status = data.get("aggregateEnrollmentStatus/status/description")
+        component_code = data.get("primaryComponent/code")
+        component = data.get("primaryComponent/description")
+
         try:
-            m.save()
-            print("added {}".format(m.display_name))
-        except django.db.utils.IntegrityError:
-            pass
+            obj, created = models.BerkeleyClass.objects.update_or_create(
+                display_name=display_name,
+                term=term,
+                term_name=term_name,
+                title=title,
+                number=number,
+                offering_number=offering_number,
+                description=description,
+                subject_code=subject_code,
+                subject=subject,
+                enrolled_count=enrolled_count,
+                waitlisted_count=waitlisted_count,
+                min_enroll=min_enroll,
+                max_enroll=max_enroll,
+                max_waitlist=max_waitlist,
+                enrollment_status_code=enrollment_status_code,
+                enrollment_status=enrollment_status,
+                component_code=component_code,
+                component=component
+            )
+            message = "created" if created else "updated"
+            print("{} {}.".format(message, obj.display_name))
+        except django.db.utils.IntegrityError as e:
+            print(e)
         except ValueError as e:
             print(e)
