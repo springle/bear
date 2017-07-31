@@ -13,3 +13,6 @@ superuser:
 
 psql:
 	docker-compose exec db psql -U postgres
+
+build:
+	docker-compose exec frontend npm run build

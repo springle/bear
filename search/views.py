@@ -39,9 +39,11 @@ class BerkeleyClassViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = BerkeleyClass.objects.all()
     serializer_class = BerkeleyClassSerializer
-    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    search_fields = ('title',)
-    ordering_fields = ('id',)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend)
+    search_fields = ('display_name',)
+    ordering_fields = ('id', 'display_name', 'subject',)
+    filter_fields = ('enrollment_status_code', 'term', 'waitlisted_count',
+                    'component_code', 'subject_code')
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
