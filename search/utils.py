@@ -60,7 +60,7 @@ class BerkeleyAPI:
                     self.params["page-number"] += 1
                 else:
                     should_continue = False
-                    print("No response for query:\n url:{}\n params:{}\n headers:{}\n".format(self.url,
+                    print("No new classes for query:\n url:{}\n params:{}\n headers:{}\n".format(self.url,
                                                                                             self.params,
                                                                                             self.headers))
 
@@ -69,7 +69,7 @@ class ClassesAPI:
         url = "https://apis.berkeley.edu/uat/sis/v1/classes"
         params = {
             "term-id": term,
-            "page-size": 10
+            "page-size": 100
         }
         headers = {
             "app_id": CLASSES_APP_ID,

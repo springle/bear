@@ -20,6 +20,8 @@ class BerkeleyClass(models.Model):
     max_waitlist = models.IntegerField(default=0)
     component_code = models.CharField(max_length=100, default='')
     component = models.CharField(max_length=100, default='')
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     # Optional fields
     enrollment_status_code = models.CharField(max_length=100, default='', null=True)

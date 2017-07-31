@@ -10,3 +10,6 @@ migrate:
 
 superuser:
 	docker-compose exec backend python3 manage.py createsuperuser
+
+psql:
+	docker-compose exec db psql -U postgres
