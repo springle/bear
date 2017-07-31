@@ -1,12 +1,37 @@
+import logging
+import os
+
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.views.generic import View
+
 from search.models import Course
 from search.serializers import CourseSerializer, UserSerializer
+
 from rest_framework import viewsets, permissions, filters
 
-def index(request):
-    context = {}
-    return render(request, 'search/index.html', context)
+class FrontendAppView(View):
+    """
+    Serves the compiled frontend entry point (only works if your
+    staticfiles are in frontend/build/).
+    """
+    def get(self, request):
+        try:
+            with open(os.path.join(settings.REACT_APP_DIR, 'build', 'index.html')) as f:
+                return HttpResponse(f.read())
+        except FileNotFoundError:
+            logging.exception('Production build of app not found')
+            return HttpResponse(
+                """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead
+		for local development. Or, run `cd frontend && npm run
+                build` to test production settings.
+                """,
+                status=501,
+            )
 
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     """
