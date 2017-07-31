@@ -80,6 +80,9 @@ class ClassesAPI:
         self.berkeley_api = BerkeleyAPI(url, params, headers)
 
     def query(self):
+        print("----------------")
+        print("GETTING CLASSES")
+        print("----------------")
         self.berkeley_api.query(self.process_batch)
 
     def process_batch(self, response):
@@ -114,6 +117,7 @@ class ClassesAPI:
         m.component = data.get("primaryComponent/description")
         try:
             m.save()
+            print("added {}".format(m.display_name))
         except django.db.utils.IntegrityError:
             pass
         except ValueError as e:

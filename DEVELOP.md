@@ -19,20 +19,25 @@ export CLASSES_APP_KEY="<API_SECRET_KEY>"
 
 1. Make sure your dev environment has been set up, and
 `docker-compose up` has been run.
-2. Run `docker ps` to view your running containers. Copy the container ID
-of the `backend` container.
-3. Run `docker exec -it <backend-container-id> bash` to open up a shell
-session inside that container.
-4. Run `python3 manage.py makemigrations` and `python3 manage.py migrate` to
-set up your database.
-5. (Optional) Run `python3 manage.py createsuperuser` to generate login
-credentials for the Django admin.
+2. Run `make migrations`.
+3. (Optional) If you set up your bash profile with the API credentials
+described in the previous section, then you can run `make get-classes` to
+populate your database using the Berkeley API.
+4. (Optional) Run `make superuser` to generate login credentials
+for the Django admin.
 6. (Optional) Open [localhost:8000/admin](http://localhost:8000/admin) and log
 in using the credentials you just created.
 
 # FAQ
 
-Q: My containers didn't shut down properly after I hit `<CTRL-C>`. What should
+Q: The backend container failed because of a race condition with the database.
+What should I do?
+
+A: Run `docker-compose restart backend` :)
+
+--
+
+Q: My containers didn't shut down properly after I hit <CTRL-C>. What should
 I do?
 
 A: Run `docker-compose kill` to shut down your containers. Run `docker ps` to
