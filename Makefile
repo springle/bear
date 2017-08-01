@@ -16,3 +16,6 @@ psql:
 
 build:
 	docker-compose exec frontend npm run build
+
+add-npm-package:
+	docker-compose exec frontend npm install $(PACKAGE) --save
