@@ -30,6 +30,12 @@ in using the credentials you just created.
 
 # FAQ
 
+Q: How can I add a new npm package?
+
+A: Run `PACKAGE=<your-new-package> make add-npm-package`.
+
+--
+
 Q: The backend container failed because of a race condition with the database.
 What should I do?
 
