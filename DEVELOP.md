@@ -3,9 +3,11 @@
 1. Clone this repo.
 2. Install [docker](https://docs.docker.com/engine/installation/) and
 [docker-compose](https://docs.docker.com/compose/install/).
-3. Run `docker-compose up` from the project directory.
-4. Open [localhost:3000](http://localhost:3000) in your browser.
-5. (Optional) If you plan to use the Berkeley APIs, you will need to add
+3. Add the following line to `/etc/hosts`: `<docker-ip> bear.dev`. Unless
+you are using Docker Machine, your `<docker-ip>` is probably just `bear.dev`.
+4. Run `docker-compose up` from the project directory.
+5. Open [bear.dev:3000](http://bear.dev:3000) in your browser.
+6. (Optional) If you plan to use the Berkeley APIs, you will need to add
 the following two lines to your bash profile. Ask one of the admins to
 give you the API_KEY and API_SECRET_KEY. Remember to restart your terminal
 after updating your bash profile for the changes to take effect.
@@ -25,7 +27,7 @@ described in the previous section, then you can run `make get-classes` to
 populate your database using the Berkeley API.
 4. (Optional) Run `make superuser` to generate login credentials
 for the Django admin.
-6. (Optional) Open [localhost:8000/admin](http://localhost:8000/admin) and log
+6. (Optional) Open [bear.dev:8000/admin](http://bear.dev:8000/admin) and log
 in using the credentials you just created.
 
 # FAQ
@@ -55,6 +57,6 @@ confirm that you no longer have any running containers. Now, if you run
 Q: Where can I find documentation on the API endpoints?
 
 A: Run `docker-compose up`, then go to
-[localhost:8000/search](http://localhost:8000/search) to view the api explorer.
+[bear.dev:8000/search](http://bear.dev:8000/search) to view the api explorer.
 
 --

@@ -142,4 +142,4 @@ STATIC_URL = '/static/'
 LOCAL = os.environ.get('LOCAL')
 if LOCAL:
     MIDDLEWARE.append('search.middleware.dev_cors_middleware')
-    ALLOWED_HOSTS.extend(['backend', 'localhost'])
+    ALLOWED_HOSTS.extend(['backend', 'localhost', 'bear.dev'])
