@@ -1,7 +1,7 @@
 #!/bin/bash
 
-until $(bash -c "docker-compose exec backend echo >/dev/null"); do
-    printf '.'
+until $(bash -c "docker-compose exec backend manage.py shell --command='pass' >/dev/null 2>/dev/null"); do
+    printf '[test script] waiting for backend container...'
     sleep 5
 done
 
