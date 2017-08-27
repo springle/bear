@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import bear from './bear.gif';
 import './App.css';
 import $ from 'jquery';
+{/* import IntegrationAutosuggest from './components/IntegrationAutosuggest.js'; */}
 
 class App extends Component {
   render() {
@@ -11,7 +12,7 @@ class App extends Component {
           <img src={bear} className="App-logo" alt="logo" />
           <h2>bear.ai</h2>
         </div>
-        <CourseList url="/search/berkeley-classes/?ordering=-id" pollInterval={1000} />
+        {/* <CourseList url="/search/berkeley-classes/?ordering=-id" pollInterval={1000} /> */}
       </div>
     );
   }
