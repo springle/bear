@@ -58,7 +58,3 @@ target/
 
 # Migrations
 migrations/
-
-# React stuff
-package-lock.json
-

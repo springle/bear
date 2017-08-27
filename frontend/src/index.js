@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import { handleEvent } from './utils';
 import { lowerCase } from 'lodash';
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import Home from './App/Home';
 import 'typeface-roboto';
-import App from './App';
 
 const debug = false;
 var ReactGA = require('react-ga');
@@ -55,5 +54,15 @@ window.addEventListener('keypress', function(e) {
   }
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// eslint-disable-next-line
+{/*
+	react-GA requires react-router as an npm package, where we have:
+
+	var app = document.getElementById('root');
+	ReactDOM.render(<Router routes={routes} onUpdate={logPageView} />, app);
+	registerServiceWorker();
+
+	replace everything below this comment
+*/}
+ReactDOM.render(<Home onUpdate={logPageView} />, document.getElementById('root'));
 registerServiceWorker();
