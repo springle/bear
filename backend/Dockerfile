@@ -8,4 +8,4 @@ ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 
 ADD . /code/
-ENTRYPOINT /code/bin/entrypoint.sh
+ENTRYPOINT /code/entrypoint.sh
