@@ -3,10 +3,10 @@ services:
   db:
     image: postgres
   backend:
-    build: .
+    build: backend
     restart: always
     volumes:
-      - .:/code
+      - ./backend:/code
     ports:
       - "8000:8000"
     depends_on:
